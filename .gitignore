@@ -1,0 +1,25 @@
+# Node.js
+node_modules/       
+package-lock.json   
+npm-debug.log*      
+
+# Environment Secrets
+.env                
+.env.local
+.env*.local         
+
+# macOS 
+.DS_Store           
+._*                 
+.Spotlight-V100     
+.Trashes            
+
+# IDE/Editor 
+.vscode/
+
+# Build/Cache
+dist/               
+build/              
+.eslintcache        
+*.log               
+logs/               
