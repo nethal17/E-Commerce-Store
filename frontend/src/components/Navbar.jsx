@@ -2,11 +2,17 @@ import { ShoppingCart, UserPlus, LogIn, LogOut, Lock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useUserStore } from "../../stores/useUserStore";
 import { useCartStore } from "../../stores/useCartStore";
+import { useEffect, useState } from "react";
+import axios from "../../lib/axios.js";
 
 const Navbar = () => {
-	const { user, logout } = useUserStore();
+	const { user, logout, checkAuth } = useUserStore();
 	const isAdmin = user?.role === "admin";
-	const { cart } = useCartStore();
+	const { cart, getCartItems } = useCartStore();
+
+	useEffect(() => {
+		getCartItems();
+	}, [getCartItems]);
 
 	return (
 		<header className='fixed top-0 left-0 z-40 w-full transition-all duration-300 bg-gray-900 border-b shadow-lg bg-opacity-90 backdrop-blur-md border-sky-800'>
@@ -82,4 +88,5 @@ const Navbar = () => {
 		</header>
 	);
 };
+
 export default Navbar;

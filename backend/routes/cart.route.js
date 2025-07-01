@@ -1,5 +1,5 @@
 import express from 'express';
-import { getCartProducts, addToCart, removeAllFromCart, updateQuantity } from '../controllers/cart.controller.js';
+import { getCartProducts, addToCart, removeAllFromCart, updateQuantity, clearCartAfterPayement } from '../controllers/cart.controller.js';
 import { protectRoute } from '../middleware/auth.middleware.js';
 
 const router = express.Router();
@@ -7,6 +7,7 @@ const router = express.Router();
 router.get("/", protectRoute, getCartProducts);
 router.post("/", protectRoute, addToCart);
 router.delete("/", protectRoute, removeAllFromCart);
+router.delete("/clear", protectRoute, clearCartAfterPayement);
 router.put("/:id", protectRoute, updateQuantity);
 
 export default router;

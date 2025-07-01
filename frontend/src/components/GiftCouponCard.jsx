@@ -3,18 +3,28 @@ import { useEffect, useState } from "react";
 import { useCartStore } from "../../stores/useCartStore";
 
 const GiftCouponCard = () => {
-    const [userInputCode, setUserInputCode] = useState('');
-    const { coupon, isCouponApplied } = useCartStore();
+	const [userInputCode, setUserInputCode] = useState("");
+	const { coupon, isCouponApplied, applyCoupon, getMyCoupon, removeCoupon } = useCartStore();
 
-    const handleApplyCoupon = () => {
-        console.log(userInputCode);
-    };
+	useEffect(() => {
+		getMyCoupon();
+	}, [getMyCoupon]);
 
-    const handleRemoveCoupon = () => {
-        console.log("Coupon removed");
-    };
-    
-    return (
+	useEffect(() => {
+		if (coupon) setUserInputCode(coupon.code);
+	}, [coupon]);
+
+	const handleApplyCoupon = () => {
+		if (!userInputCode) return;
+		applyCoupon(userInputCode);
+	};
+
+	const handleRemoveCoupon = async () => {
+		await removeCoupon();
+		setUserInputCode("");
+	};
+
+	return (
 		<motion.div
 			className='p-4 space-y-4 bg-gray-800 border border-gray-700 rounded-lg shadow-sm sm:p-6'
 			initial={{ opacity: 0, y: 20 }}
@@ -30,8 +40,8 @@ const GiftCouponCard = () => {
 						type='text'
 						id='voucher'
 						className='block w-full rounded-lg border border-gray-600 bg-gray-700 
-                            p-2.5 text-sm text-white placeholder-gray-400 focus:border-sky-500 
-                            focus:ring-sky-500'
+            p-2.5 text-sm text-white placeholder-gray-400 focus:border-sky-500 
+            focus:ring-sky-500'
 						placeholder='Enter code here'
 						value={userInputCode}
 						onChange={(e) => setUserInputCode(e.target.value)}
@@ -81,6 +91,5 @@ const GiftCouponCard = () => {
 			)}
 		</motion.div>
 	);
-}
-
-export default GiftCouponCard
+};
+export default GiftCouponCard;
