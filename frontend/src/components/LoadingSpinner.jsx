@@ -1,13 +1,30 @@
+import React from 'react';
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+
 const LoadingSpinner = () => {
-	return (
-		<div className='flex items-center justify-center min-h-screen bg-gray-900'>
-			<div className='relative'>
-				<div className='w-20 h-20 border-2 rounded-full border-sky-200' />
-				<div className='absolute top-0 left-0 w-20 h-20 border-t-2 rounded-full border-sky-600 animate-spin' />
-				<div className='sr-only'>Loading</div>
-			</div>
-		</div>
-	);
+  return (
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+	  flexDirection: 'column', 
+      height: 'max-h-screen', // Takes full viewport height
+      width: '100%',    // Takes full width
+	
+    }}>
+      <div style={{
+        width: '250px',  // Set your desired width
+        height: '250px',  // Set your desired height
+		marginTop: '100px'
+      }}>
+        <DotLottieReact
+          src="/animations/loading.json"
+          loop
+          autoplay
+        />
+      </div>
+    </div>
+  );
 };
 
 export default LoadingSpinner;
