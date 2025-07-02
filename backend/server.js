@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
+import cors from "cors";
 
 import authRoutes from "./routes/auth.route.js";
 import productRoutes from "./routes/product.route.js";
@@ -15,6 +16,16 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+const allowedOrigins = [
+	"https://aesthetic-croquembouche-9d6212.netlify.app", // Replace with your actual Netlify domain
+	"http://localhost:5173", // (Optional) For local development
+];
+
+app.use(cors({
+	origin: allowedOrigins,
+	credentials: true, // If you need to send cookies/auth headers
+  }));
 
 app.use(express.json({ limit: "10mb" })); // allows you to parse the body of the request
 app.use(cookieParser());
