@@ -13,6 +13,7 @@ import analyticsRoutes from "./routes/analytics.route.js";
 import { connectDB } from "./lib/db.js";
 
 dotenv.config();
+await connectDB();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -39,7 +40,9 @@ app.get('/', (req,res) => {
 	});
 });
 
-app.listen(PORT, () => {
+/*app.listen(PORT, () => {
 	console.log("Server is running on http://localhost:" + PORT);
 	connectDB();
-});
+});*/
+
+export default app;
