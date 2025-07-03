@@ -18,7 +18,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-	origin: 'http://localhost:5173',
+	origin: 'https://resonant-frangipane-411857.netlify.app',
 	credentials: true, 
 }));
 
