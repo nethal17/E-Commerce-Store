@@ -13,18 +13,22 @@ import analyticsRoutes from "./routes/analytics.route.js";
 import { connectDB } from "./lib/db.js";
 
 dotenv.config();
-await connectDB();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-	origin: 'https://resonant-frangipane-411857.netlify.app',
+	origin: 'http://localhost:5173',
 	credentials: true, 
 }));
 
-app.use(express.json({ limit: "10mb" })); // allows you to parse the body of the request
+app.use(express.json({ limit: "10mb" }));
 app.use(cookieParser());
+
+app.listen(PORT, () => {
+	console.log("Server is running on http://localhost:" + PORT);
+	connectDB();
+});
 
 app.use("/api/auth", authRoutes);
 app.use("/api/products", productRoutes);
@@ -33,16 +37,3 @@ app.use("/api/coupons", couponRoutes);
 app.use("/api/payments", paymentRoutes);
 app.use("/api/analytics", analyticsRoutes);
 
-app.get('/', (req,res) => {
-	res.send({
-		activeStatus: true,
-		error: false
-	});
-});
-
-/*app.listen(PORT, () => {
-	console.log("Server is running on http://localhost:" + PORT);
-	connectDB();
-});*/
-
-export default app;
