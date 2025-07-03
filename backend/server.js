@@ -17,15 +17,10 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const allowedOrigins = [
-	"https://aesthetic-croquembouche-9d6212.netlify.app", // Replace with your actual Netlify domain
-	"http://localhost:5173", // (Optional) For local development
-];
-
 app.use(cors({
-	origin: allowedOrigins,
-	credentials: true, // If you need to send cookies/auth headers
-  }));
+	origin: 'http://localhost:5173',
+	credentials: true, 
+}));
 
 app.use(express.json({ limit: "10mb" })); // allows you to parse the body of the request
 app.use(cookieParser());
